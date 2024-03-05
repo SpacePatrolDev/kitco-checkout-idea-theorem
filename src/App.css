@@ -1,38 +1,134 @@
-.App {
-  text-align: center;
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Lato";
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header {
+  position: absolute;
+  background: #252f3d;
+  height: 56.83px;
+  width: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header-logo-img {
+  color: white;
+  margin: 12px 0px 0px 166px;
+  height: 32px;
+  width: 294px;
+  filter: brightness(0) invert(1);
+}
+
+.reg-form {
+  width: 34%;
+  max-width: 502px;
+}
+
+.form-title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  margin-top: 102px;
+}
+
+.form-input-container {
+  background-color: white;
+  border-radius: 8px;
+  padding: 40px;
+  margin: 15px 0px 45px 0px;
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
+}
+
+.form-dropdown-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.form-dropdown-container *:not(:first-child):not(:last-child) {
+  margin: 0px 25px;
+}
+
+.form-text-input,
+.form-dropdown-input {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+form label {
+  margin-bottom: 10px;
+  width: 100%;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+}
+
+form input,
+select {
+  margin-bottom: 16px;
+  width: 100%;
+  height: 50px;
+  border-radius: 4px;
+  border: 1px solid #a5b6cd;
+}
+
+/* form input {
+  padding: 11.5px 14.5px;
+}
+
+form select {
+  padding: 11.5px 16px;
+} */
+
+.form-button-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.submit-button {
+  width: 145px;
+  height: 46px;
+  padding: 11px 34px;
+  margin: 0px 0px 102px 7.5px;
+  border: none;
+  align-self: flex-end;
+  background-color: #127c95;
   color: white;
+  border-radius: 6px;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.cancel-button {
+  width: 145px;
+  height: 46px;
+  padding: 10px 32px;
+  margin: 0px 7.5px 102px 0px;
+  border: 1px solid #4790a1;
+  align-self: flex-end;
+  background-color: white;
+  color: #4790a1;
+  border-radius: 6px;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+  cursor: pointer;
 }
