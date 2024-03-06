@@ -146,14 +146,18 @@ const App = () => {
       </div>
       {alertType === "Success" && (
         <div className="alert-container">
-          <Alert variant="filled" severity="success">
+          <Alert className="alert-container-text" severity="success">
             {alertMessage}
           </Alert>
         </div>
       )}
       {alertType === "Error" && (
         <div className="alert-container">
-          <Alert variant="filled" severity="error"></Alert>
+          <Alert
+            className="alert-container-text"
+            variant="filled"
+            severity="error"
+          ></Alert>
         </div>
       )}
       <form className="reg-form" onSubmit={handleSubmit}>
