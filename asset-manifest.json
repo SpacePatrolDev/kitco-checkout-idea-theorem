@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/kitco-checkout-idea-theorem/static/css/main.c08a6102.css",
+    "main.js": "/kitco-checkout-idea-theorem/static/js/main.d3d62b1b.js",
+    "static/media/main-logo.png": "/kitco-checkout-idea-theorem/static/media/main-logo.6233daa7e68517f1d7cc.png",
+    "index.html": "/kitco-checkout-idea-theorem/index.html",
+    "main.c08a6102.css.map": "/kitco-checkout-idea-theorem/static/css/main.c08a6102.css.map",
+    "main.d3d62b1b.js.map": "/kitco-checkout-idea-theorem/static/js/main.d3d62b1b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c08a6102.css",
+    "static/js/main.d3d62b1b.js"
+  ]
+}
