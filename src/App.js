@@ -16,14 +16,96 @@ const App = () => {
     confirm_password: "",
   });
 
+  const [errors, setErrors] = useState({
+    full_name: "",
+    contact_number: "",
+    day: "",
+    month: "",
+    year: "",
+    email: "",
+    password: "",
+    confirm_password: "",
+  });
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    //Validation to check if any symbols are present
+    if (/[^a-zA-Z\s]/.test(formData.full_name)) {
+      newErrors.full_name =
+        "Sorry, this full name is not valid. Please try again.";
+    }
+
+    //Validation to check if it contains exact 10 digits
+    if (!/^\d{10}$/.test(formData.contact_number)) {
+      newErrors.contact_number =
+        "Sorry, this contact number is not valid. Please try again.";
+    }
+
+    //Validation for proper email format
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Sorry, this email is not valid. Please try again.";
+    }
+
+    // Validate password for lowercase, uppercase, numbers, and minimum length of 8 characters
+    if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}/.test(formData.password)) {
+      newErrors.password =
+        "Password must contain at least 1 lowercase letter, 1 uppercase letter, 1 number, and be at least 8 characters long.";
+    }
+
+    // Validate confirm_password to match password
+    if (formData.confirm_password !== formData.password) {
+      newErrors.confirm_password =
+        "Sorry Passwords do not match. Please try again.";
+    }
+
+    // Validate if date is in the past
+    const selectedDate = new Date(
+      formData.year,
+      formData.month - 1,
+      formData.day
+    );
+    const currentDate = new Date();
+    if (selectedDate > currentDate) {
+      newErrors.date = "Selected date cannot be in the future.";
+    }
+
+    setErrors(newErrors);
+
+    //Return true if 0 errors, else false
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    const isValid = validateForm();
+
+    if (isValid) {
+      console.log(formData);
+    }
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: "" });
+    }
+  };
+
+  const handleInputBlur = (e) => {
+    const { name, value } = e.target;
+
+    //Check if any fields are left empty
+    if (typeof value === "string" ? value.trim() === "" : value != null) {
+      setErrors({
+        ...errors,
+        [name]: "This field can not be empty. Please enter valid input.",
+      });
+    }
   };
 
   return (
@@ -38,9 +120,10 @@ const App = () => {
             name="full_name"
             label="Full Name"
             placeholder="Full Name"
-            errorMessage="Sorry, this full name is not valid. Please try again."
+            errorMessage={errors.full_name}
             value={formData.full_name}
             onChange={handleInputChange}
+            onBlur={handleInputBlur}
           />
 
           <FormTextInput
@@ -48,9 +131,10 @@ const App = () => {
             label="Contact Number"
             type="tel"
             placeholder="Contact Number"
-            errorMessage="Sorry, this contact number is not valid. Please try again."
+            errorMessage={errors.contact_number}
             value={formData.contact_number}
             onChange={handleInputChange}
+            onBlur={handleInputBlur}
           />
 
           <FormDateSelector
@@ -66,9 +150,10 @@ const App = () => {
             label="Email Address"
             type="email"
             placeholder="Email Address"
-            errorMessage="Sorry, this email address is not valid. Please try again."
+            errorMessage={errors.email}
             value={formData.email}
             onChange={handleInputChange}
+            onBlur={handleInputBlur}
           />
 
           <FormTextInput
@@ -76,9 +161,10 @@ const App = () => {
             label="Password"
             type="password"
             placeholder="Create Password"
-            errorMessage="Sorry, this password is not valid. Please try again."
+            errorMessage={errors.password}
             value={formData.password}
             onChange={handleInputChange}
+            onBlur={handleInputBlur}
           />
 
           <FormTextInput
@@ -86,9 +172,10 @@ const App = () => {
             label="Confirm Password"
             type="password"
             placeholder="Confirm Password"
-            errorMessage="Sorry, this must be same as password field. Please try again."
+            errorMessage={errors.confirm_password}
             value={formData.confirm_password}
             onChange={handleInputChange}
+            onBlur={handleInputBlur}
           />
         </div>
 

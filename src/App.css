@@ -137,10 +137,5 @@ span {
 
 .form-text-input-container > span {
   width: 100%;
-  margin-top: 5px;
-  display: none;
-}
-
-input:invalid ~ .form-text-input-container > span {
-  display: block;
+  margin-top: 6px;
 }
