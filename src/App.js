@@ -3,18 +3,24 @@ import "./App.css";
 import FormTextInput from "./components/FormTextInput";
 import FormDateSelector from "./components/FormDateSelector";
 import headerImage from "./res/main-logo.png";
+import Alert from "@mui/material/Alert";
+
+const initialFormData = {
+  full_name: "",
+  contact_number: "",
+  day: "",
+  month: "",
+  year: "",
+  email: "",
+  password: "",
+  confirm_password: "",
+};
 
 const App = () => {
-  const [formData, setFormData] = useState({
-    full_name: "",
-    contact_number: "",
-    day: "",
-    month: "",
-    year: "",
-    email: "",
-    password: "",
-    confirm_password: "",
-  });
+  const [formData, setFormData] = useState({ ...initialFormData });
+  const [errors, setErrors] = useState({ ...initialFormData });
+  const [alertMessage, setAlertMessage] = useState(null);
+  const [alertType, setAlertType] = useState(null);
 
   const formAPIData = {
     full_name: formData.full_name,
@@ -23,17 +29,6 @@ const App = () => {
     date_of_birth: formData.day + formData.month + formData.year,
     password: formData.password,
   };
-
-  const [errors, setErrors] = useState({
-    full_name: "",
-    contact_number: "",
-    day: "",
-    month: "",
-    year: "",
-    email: "",
-    password: "",
-    confirm_password: "",
-  });
 
   const validateForm = () => {
     const newErrors = {};
@@ -107,12 +102,12 @@ const App = () => {
         }
         // Handle successful response
         const responseData = await response.json();
-
-        console.log("dev_message:", responseData.dev_message);
-        console.log("title:", responseData.title);
-        console.log("description:", responseData.description);
+        setAlertType(responseData.title);
+        setAlertMessage(responseData.description);
+        setFormData({ ...initialFormData });
       } catch (error) {
-        console.error("Error creating user:", error.message);
+        setAlertType("Error");
+        setAlertMessage("Error creating user:", error.message);
       }
     }
   };
@@ -139,11 +134,28 @@ const App = () => {
     }
   };
 
+  const handleCancel = () => {
+    // Clear the form when cancel button is clicked
+    setFormData({ ...initialFormData });
+  };
+
   return (
     <div className="app">
       <div className="header">
         <img className="header-logo-img" src={headerImage} alt="header-img" />
       </div>
+      {alertType === "Success" && (
+        <div className="alert-container">
+          <Alert variant="filled" severity="success">
+            {alertMessage}
+          </Alert>
+        </div>
+      )}
+      {alertType === "Error" && (
+        <div className="alert-container">
+          <Alert variant="filled" severity="error"></Alert>
+        </div>
+      )}
       <form className="reg-form" onSubmit={handleSubmit}>
         <h2 className="form-title">Create User Account</h2>
         <div className="form-input-container">
@@ -211,7 +223,7 @@ const App = () => {
         </div>
 
         <div className="form-button-container">
-          <button className="cancel-button" type="reset">
+          <button className="cancel-button" onClick={handleCancel}>
             Cancel
           </button>
 
