@@ -26,16 +26,20 @@ const FormDateSelector = (props) => {
   const handleDayChange = (e) => {
     setDate({ ...date, day: e.target.value });
     onChange(e);
+    console.log(e.target.name);
+    console.log(e.target.value);
   };
 
   const handleMonthChange = (e) => {
     setDate({ ...date, month: e.target.value });
     onChange(e);
+    console.log("Month: " + e.target.value);
   };
 
   const handleYearChange = (e) => {
     setDate({ ...date, year: e.target.value });
     onChange(e);
+    console.log("Year: " + e.target.value);
   };
 
   const currentDate = new Date();
@@ -53,7 +57,8 @@ const FormDateSelector = (props) => {
           <Select
             labelId="form-select-day-label"
             id="form-select-day"
-            value={date.day}
+            name="day"
+            value={day}
             label="Day"
             onChange={handleDayChange}
             // onBlur={}
@@ -72,6 +77,7 @@ const FormDateSelector = (props) => {
           <Select
             labelId="form-select-month-label"
             id="form-select-month"
+            name="month"
             value={date.month}
             label="Month"
             onChange={handleMonthChange}
@@ -90,6 +96,7 @@ const FormDateSelector = (props) => {
           <Select
             labelId="form-select-year-label"
             id="form-select-year"
+            name="year"
             value={date.year}
             label="Year"
             onChange={handleYearChange}
