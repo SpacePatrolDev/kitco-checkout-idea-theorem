@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import FormTextInput from "./components/FormTextInput";
-import FormDropdownInput from "./components/FormDropdownInput";
+import FormDateSelector from "./components/FormDateSelector";
 import headerImage from "./res/main-logo.png";
 
 const App = () => {
@@ -37,7 +37,8 @@ const App = () => {
           <FormTextInput
             name="full_name"
             label="Full Name"
-            placeholder="Full Name *"
+            placeholder="Full Name"
+            errorMessage="Sorry, this full name is not valid. Please try again."
             value={formData.full_name}
             onChange={handleInputChange}
           />
@@ -46,18 +47,26 @@ const App = () => {
             name="contact_number"
             label="Contact Number"
             type="tel"
-            placeholder="Contact Number *"
+            placeholder="Contact Number"
+            errorMessage="Sorry, this contact number is not valid. Please try again."
             value={formData.contact_number}
             onChange={handleInputChange}
           />
 
-          <FormDropdownInput />
+          <FormDateSelector
+            label="Birthdate"
+            day={formData.day}
+            month={formData.month}
+            year={formData.year}
+            onChange={handleInputChange}
+          />
 
           <FormTextInput
             name="email"
             label="Email Address"
             type="email"
-            placeholder="Email Address *"
+            placeholder="Email Address"
+            errorMessage="Sorry, this email address is not valid. Please try again."
             value={formData.email}
             onChange={handleInputChange}
           />
@@ -66,7 +75,8 @@ const App = () => {
             name="password"
             label="Password"
             type="password"
-            placeholder="Create Password *"
+            placeholder="Create Password"
+            errorMessage="Sorry, this password is not valid. Please try again."
             value={formData.password}
             onChange={handleInputChange}
           />
@@ -75,7 +85,8 @@ const App = () => {
             name="confirm_password"
             label="Confirm Password"
             type="password"
-            placeholder="Confirm Password *"
+            placeholder="Confirm Password"
+            errorMessage="Sorry, this must be same as password field. Please try again."
             value={formData.confirm_password}
             onChange={handleInputChange}
           />
@@ -85,6 +96,7 @@ const App = () => {
           <button className="cancel-button" type="reset">
             Cancel
           </button>
+
           <button className="submit-button" type="submit">
             Submit
           </button>
