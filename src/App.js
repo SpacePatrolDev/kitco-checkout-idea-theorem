@@ -16,6 +16,14 @@ const App = () => {
     confirm_password: "",
   });
 
+  const formAPIData = {
+    full_name: formData.full_name,
+    contact_number: formData.contact_number,
+    email: formData.email,
+    date_of_birth: formData.day + formData.month + formData.year,
+    password: formData.password,
+  };
+
   const [errors, setErrors] = useState({
     full_name: "",
     contact_number: "",
@@ -76,13 +84,36 @@ const App = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const isValid = validateForm();
 
     if (isValid) {
       console.log(formData);
+      try {
+        const response = await fetch(
+          "https://fullstack-test-navy.vercel.app/api/users/create",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formAPIData),
+          }
+        );
+        if (!response.ok) {
+          throw new Error("Failed to create user");
+        }
+        // Handle successful response
+        const responseData = await response.json();
+
+        console.log("dev_message:", responseData.dev_message);
+        console.log("title:", responseData.title);
+        console.log("description:", responseData.description);
+      } catch (error) {
+        console.error("Error creating user:", error.message);
+      }
     }
   };
 
