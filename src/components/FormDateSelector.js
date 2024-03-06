@@ -26,20 +26,16 @@ const FormDateSelector = (props) => {
   const handleDayChange = (e) => {
     setDate({ ...date, day: e.target.value });
     onChange(e);
-    console.log(e.target.name);
-    console.log(e.target.value);
   };
 
   const handleMonthChange = (e) => {
     setDate({ ...date, month: e.target.value });
     onChange(e);
-    console.log("Month: " + e.target.value);
   };
 
   const handleYearChange = (e) => {
     setDate({ ...date, year: e.target.value });
     onChange(e);
-    console.log("Year: " + e.target.value);
   };
 
   const currentDate = new Date();
@@ -61,7 +57,6 @@ const FormDateSelector = (props) => {
             value={day}
             label="Day"
             onChange={handleDayChange}
-            // onBlur={}
             error={!isDateValid}
           >
             {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
@@ -78,7 +73,7 @@ const FormDateSelector = (props) => {
             labelId="form-select-month-label"
             id="form-select-month"
             name="month"
-            value={date.month}
+            value={month}
             label="Month"
             onChange={handleMonthChange}
             error={!isDateValid}
@@ -97,7 +92,7 @@ const FormDateSelector = (props) => {
             labelId="form-select-year-label"
             id="form-select-year"
             name="year"
-            value={date.year}
+            value={year}
             label="Year"
             onChange={handleYearChange}
             error={!isDateValid}
